@@ -11,6 +11,10 @@
 
 @interface MasterViewController ()
 
+@property NSMutableArray *objects;
+
+-(IBAction)GoToNewItemViewController:(id)sender;
+
 @end
 
 @implementation MasterViewController
@@ -19,8 +23,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    self.objects = [[NSMutableArray alloc]init];
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(GoToNewItemViewController:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
@@ -59,7 +65,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        NSObject *object = [self.objects objectAtIndex:indexPath.row];
         DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
         [controller setDetailItem:object];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
@@ -67,41 +73,65 @@
     }
 }
 
+//We are inside the mast view (self) rn. Below is a method to create a new view controller and
+
+-(IBAction)GoToNewItemViewController:(id)sender{
+
+//Here we are bringing up an alert controller
+    UIAlertController *alertController =
+    [UIAlertController alertControllerWithTitle:@"Add a Friend"
+                                        message:@"Enter a valid GitHub username"
+                                preferredStyle:UIAlertControllerStyleAlert];
+//Below formats the text field in the instance of the alert controller we just created. In this case, we have Username grayed out
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder =@"UserName";
+    }];
+    
+//Now, we have to create a little delegate to do the work of sending what the user inputs
+   
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"User Cancelled");
+    }];
+    
+    UIAlertAction *okAlert = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UITextField* textField = alertController.textFields.lastObject;
+        NSLog(@"%@", textField.text);
+        [_objects addObject:textField.text];
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[_objects count]-1 inSection:0];
+        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }];
+    
+    [alertController addAction:okAlert];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+
+}
+
 #pragma mark - Table View
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[self.fetchedResultsController sections] count];
+    return 1;
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    return [sectionInfo numberOfObjects];
+    return self.objects.count;
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-    [self configureCell:cell withObject:object];
+    NSDate *object = self.objects[indexPath.row];
+    cell.textLabel.text = [object description];
     return cell;
 }
-
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
-            
-        NSError *error = nil;
-        if (![context save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
+        [self.objects removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
 }
 
