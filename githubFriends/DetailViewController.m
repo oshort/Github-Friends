@@ -11,6 +11,7 @@
 @interface DetailViewController () <NSURLSessionDelegate>
 
 @property NSMutableData *receivedData;
+@property NSMutableArray *repos;
 
 @end
 
@@ -18,18 +19,41 @@
 
 #pragma mark - Managing the detail item
 
-- (void)setDetailItem:(id)newDetailItem {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
-            
+- (void)setFriendRepos:(NSString *)newFriendRepos {
+    if (_friendRepos != newFriendRepos) {
+        _friendRepos = newFriendRepos;
+        
         // Update the view.
         [self configureView];
     }
 }
 
-//https://api.github.com/users/%@
-
 - (void)configureView {
+    if (self.friendRepos) {
+        // Create a URL object from our string
+        NSURL *url = [NSURL URLWithString:self.friendRepos];
+        NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];
+        
+        // Data taskt o retrieve URL data
+        NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url];
+        
+        // Start the data task to start fetching data from the URL
+        [dataTask resume];
+    }
+}
+
+- (void)setDetailItem:(id)newDetailItem {
+    if (_detailItem != newDetailItem) {
+        _detailItem = newDetailItem;
+            
+        // Update the view (again).
+        [self configureView];
+    }
+}
+
+
+- (void)configView {
     // Update the user interface for the detail item.
     if (self.detailItem) {
         self.detailDescriptionLabel.text = [self.detailItem description];
@@ -53,11 +77,34 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     [self configureView];
+    self.repos = [[NSMutableArray alloc]init];
+    self.title = @"Repos!: 0";
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark Table View Cell Configuration
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.repos.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RepoCell" forIndexPath:indexPath];
+    
+    // Grab the friend object from the array to populate the cell data with
+    NSString *repo = self.repos[indexPath.row];
+    
+    // Populate the friends name
+    cell.textLabel.text = repo;
+    
+    return cell;
 }
 
 #pragma mark NSURLSessionDelegate

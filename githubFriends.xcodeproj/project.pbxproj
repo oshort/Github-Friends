@@ -16,6 +16,7 @@
 		7BAFC73C1CCE56A300CF0D42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BAFC73B1CCE56A300CF0D42 /* Assets.xcassets */; };
 		7BAFC73F1CCE56A300CF0D42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BAFC73D1CCE56A300CF0D42 /* LaunchScreen.storyboard */; };
 		7BAFC74A1CCE56A300CF0D42 /* githubFriendsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BAFC7491CCE56A300CF0D42 /* githubFriendsUITests.m */; };
+		7BAFC7561CCE9E0200CF0D42 /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BAFC7551CCE9E0200CF0D42 /* Friend.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,8 @@
 		7BAFC7451CCE56A300CF0D42 /* githubFriendsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = githubFriendsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BAFC7491CCE56A300CF0D42 /* githubFriendsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = githubFriendsUITests.m; sourceTree = "<group>"; };
 		7BAFC74B1CCE56A300CF0D42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BAFC7541CCE9E0200CF0D42 /* Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friend.h; sourceTree = "<group>"; };
+		7BAFC7551CCE9E0200CF0D42 /* Friend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Friend.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +95,8 @@
 				7BAFC7331CCE56A300CF0D42 /* MasterViewController.m */,
 				7BAFC7351CCE56A300CF0D42 /* DetailViewController.h */,
 				7BAFC7361CCE56A300CF0D42 /* DetailViewController.m */,
+				7BAFC7541CCE9E0200CF0D42 /* Friend.h */,
+				7BAFC7551CCE9E0200CF0D42 /* Friend.m */,
 				7BAFC7381CCE56A300CF0D42 /* Main.storyboard */,
 				7BAFC73B1CCE56A300CF0D42 /* Assets.xcassets */,
 				7BAFC73D1CCE56A300CF0D42 /* LaunchScreen.storyboard */,
@@ -224,6 +229,7 @@
 				7BAFC7371CCE56A300CF0D42 /* DetailViewController.m in Sources */,
 				7BAFC7341CCE56A300CF0D42 /* MasterViewController.m in Sources */,
 				7BAFC7311CCE56A300CF0D42 /* githubFriends.xcdatamodeld in Sources */,
+				7BAFC7561CCE9E0200CF0D42 /* Friend.m in Sources */,
 				7BAFC72E1CCE56A300CF0D42 /* AppDelegate.m in Sources */,
 				7BAFC72B1CCE56A300CF0D42 /* main.m in Sources */,
 			);
