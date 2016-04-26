@@ -8,10 +8,14 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "Friend.h"
+
 
 @interface MasterViewController ()
 
 @property NSMutableArray *objects;
+@property NSMutableData *dataReceived;
+
 
 -(IBAction)GoToNewItemViewController:(id)sender;
 
@@ -22,9 +26,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     self.objects = [[NSMutableArray alloc]init];
+    
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(GoToNewItemViewController:)];
     self.navigationItem.rightBarButtonItem = addButton;

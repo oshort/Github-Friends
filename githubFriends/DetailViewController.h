@@ -13,7 +13,5 @@
 @property (strong, nonatomic) id detailItem;
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 
-@property (nonatomic) NSString *friendRepos;
-
 @end
 

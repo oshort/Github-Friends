@@ -17,6 +17,7 @@
 		7BAFC73F1CCE56A300CF0D42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BAFC73D1CCE56A300CF0D42 /* LaunchScreen.storyboard */; };
 		7BAFC74A1CCE56A300CF0D42 /* githubFriendsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BAFC7491CCE56A300CF0D42 /* githubFriendsUITests.m */; };
 		7BAFC7561CCE9E0200CF0D42 /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BAFC7551CCE9E0200CF0D42 /* Friend.m */; };
+		7BAFC7591CCFB1E800CF0D42 /* RepoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BAFC7581CCFB1E800CF0D42 /* RepoTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,8 @@
 		7BAFC74B1CCE56A300CF0D42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BAFC7541CCE9E0200CF0D42 /* Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friend.h; sourceTree = "<group>"; };
 		7BAFC7551CCE9E0200CF0D42 /* Friend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Friend.m; sourceTree = "<group>"; };
+		7BAFC7571CCFB1E700CF0D42 /* RepoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepoTableViewCell.h; sourceTree = "<group>"; };
+		7BAFC7581CCFB1E800CF0D42 /* RepoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepoTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,8 @@
 			isa = PBXGroup;
 			children = (
 				7BAFC72C1CCE56A300CF0D42 /* AppDelegate.h */,
+				7BAFC7571CCFB1E700CF0D42 /* RepoTableViewCell.h */,
+				7BAFC7581CCFB1E800CF0D42 /* RepoTableViewCell.m */,
 				7BAFC72D1CCE56A300CF0D42 /* AppDelegate.m */,
 				7BAFC7321CCE56A300CF0D42 /* MasterViewController.h */,
 				7BAFC7331CCE56A300CF0D42 /* MasterViewController.m */,
@@ -230,6 +235,7 @@
 				7BAFC7341CCE56A300CF0D42 /* MasterViewController.m in Sources */,
 				7BAFC7311CCE56A300CF0D42 /* githubFriends.xcdatamodeld in Sources */,
 				7BAFC7561CCE9E0200CF0D42 /* Friend.m in Sources */,
+				7BAFC7591CCFB1E800CF0D42 /* RepoTableViewCell.m in Sources */,
 				7BAFC72E1CCE56A300CF0D42 /* AppDelegate.m in Sources */,
 				7BAFC72B1CCE56A300CF0D42 /* main.m in Sources */,
 			);
@@ -420,6 +426,7 @@
 				7BAFC7501CCE56A300CF0D42 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7BAFC7511CCE56A300CF0D42 /* Build configuration list for PBXNativeTarget "githubFriendsUITests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +435,7 @@
 				7BAFC7531CCE56A300CF0D42 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
